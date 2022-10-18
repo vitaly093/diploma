@@ -1,0 +1,5 @@
+---
+nginx:
+  hosts:
+    rev_proxy:
+      ansible_host: 178.154.204.80

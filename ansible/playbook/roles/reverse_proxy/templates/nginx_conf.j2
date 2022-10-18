@@ -1,0 +1,31 @@
+server {
+    listen 80;
+    server_name {{ item.value.server_name }};
+    access_log /var/log/nginx/{{ item.value.server_name }}-access.log;
+    error_log /var/log/nginx/{{ item.value.server_name }}-error.log;
+    return 301  https://$host$request_uri;
+
+}
+
+server {
+    listen {{ item.value.port }} ssl;
+    server_name {{ item.value.server_name }};
+    access_log /var/log/nginx/{{ item.value.server_name }}-ssl-access.log;
+    error_log /var/log/nginx/{{ item.value.server_name }}-ssl-error.log;
+
+    ssl_certificate     {{ letsencrypt_certs_dir }}/{{ item.value.server_name }}.crt;
+    ssl_certificate_key {{ letsencrypt_keys_dir }}/{{ item.value.server_name }}.key;
+    ssl_session_timeout 5m;
+    ssl_protocols TLSv1 TLSv1.1 TLSv1.2;
+    ssl_ciphers 'EECDH+AESGCM:EDH+AESGCM:AES256+EECDH:AES256+EDH';
+    ssl_prefer_server_ciphers on;
+    ssl_session_cache shared:SSL:10m;
+    
+    location /.well-known/acme-challenge/ {
+	      root /var/www/html/;
+    }
+
+    location / {
+        proxy_pass {{ item.value.proxy_pass }};
+    }
+}
