@@ -1,0 +1,44 @@
+---
+domain_name:
+  - kvitaly.ru
+  - gitlab.kvitaly.ru
+  - grafana.kvitaly.ru
+  - prometheus.kvitaly.ru
+  - alertmanager.kvitaly.ru
+
+nginx:
+  my_domains:
+      kvitaly.ru:
+        port: 443
+        server_name: kvitaly.ru
+        proxy_pass: http://192.168.100.12/
+      gitlab.kvitaly.ru:
+        port: 443
+        server_name: gitlab.kvitaly.ru
+        proxy_pass: http://192.168.100.12/
+      grafana.kvitaly.ru:
+        port: 443
+        server_name: grafana.kvitaly.ru
+        proxy_pass: http://192.168.100.12/
+      prometheus.kvitaly.ru:
+        port: 443
+        server_name: prometheus.kvitaly.ru
+        proxy_pass: http://192.168.100.12/
+      alertmanager.kvitaly.ru:
+        port: 443
+        server_name: alertmanager.kvitaly.ru
+        proxy_pass: http://192.168.100.12/
+
+challenge:
+  - { num: 0, domain: 'kvitaly.ru' }
+  - { num: 1, domain: 'gitlab.kvitaly.ru' }
+  - { num: 2, domain: 'grafana.kvitaly.ru' }
+  - { num: 3, domain: 'prometheus.kvitaly.ru' }
+  - { num: 4, domain: 'alertmanager.kvitaly.ru' }
+
+challenge_www:
+  - { num: 0, domain: 'www.kvitaly.ru' }
+  - { num: 1, domain: 'www.gitlab.kvitaly.ru' }
+  - { num: 2, domain: 'www.grafana.kvitaly.ru' }
+  - { num: 3, domain: 'www.prometheus.kvitaly.ru' }
+  - { num: 4, domain: 'www.alertmanager.kvitaly.ru' }
