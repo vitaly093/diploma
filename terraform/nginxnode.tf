@@ -13,7 +13,7 @@ resource "yandex_compute_instance" "kvitaly-ru" {
     initialize_params {
       image_id    = "${var.ubuntu-2004}"
       name        = "root-kvitaly-ru"
-      type        = "network-nvme"
+      type        = "network-ssd"
       size        = "50"
     }
   }
@@ -22,6 +22,7 @@ resource "yandex_compute_instance" "kvitaly-ru" {
     subnet_id = "${yandex_vpc_subnet.diploma-subnet-1.id}"
     nat       = true
     nat_ip_address = "178.154.204.80"
+    ip_address = "192.168.100.8"
   }
 
   metadata = {

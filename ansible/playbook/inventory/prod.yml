@@ -3,3 +3,9 @@ nginx:
   hosts:
     rev_proxy:
       ansible_host: 178.154.204.80
+db:
+  hosts:
+    db01:
+      ansible_host: 51.250.0.193
+    db02:
+      ansible_host: 51.250.111.58

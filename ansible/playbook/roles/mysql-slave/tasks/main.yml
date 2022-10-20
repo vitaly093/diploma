@@ -1,0 +1,43 @@
+---
+- name: "Configure mysql-server"
+  become: true
+  ansible.builtin.template:
+    src: slave_conf.j2
+    dest: /etc/mysql/my.cnf
+    owner: root
+    group: root
+    mode: 0644
+  tags: [configure]
+
+- name: "Restart mysql-server"
+  become: true
+  ansible.builtin.shell: "sudo systemctl restart mysql"
+  args:
+    executable: /bin/bash
+  tags: [configure]
+
+- name: "Stop slave"
+  become: true
+  community.mysql.mysql_query:
+    query: stop slave
+    login_unix_socket: /run/mysqld/mysqld.sock
+  tags: [configure]
+
+- name: "Mysql - Configure replication on the slave"
+  become: true
+  community.mysql.mysql_replication:
+    mode: changeprimary
+    primary_host: "{{ mysql_master_ip }}"
+    primary_user: replication
+    master_password: replication
+    master_log_file: "{{ hostvars['db01']['mysql_master_status']['File'] }}"
+    master_log_pos: "{{ hostvars['db01']['mysql_master_status']['Position'] }}"
+    login_unix_socket: /run/mysqld/mysqld.sock
+  tags: [configure]
+
+- name: "Start slave"
+  become: true
+  community.mysql.mysql_query:
+    query: start slave
+    login_unix_socket: /run/mysqld/mysqld.sock
+  tags: [configure]
