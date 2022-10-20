@@ -1,8 +1,40 @@
 ---
-- name: "Install nginx, ssl certificates and reverse proxy"
-  hosts: nginx
+#- name: "Install nginx, ssl certificates and reverse proxy"
+#  hosts: nginx
+#  become: yes
+#  become_user: root
+#  remote_user: ubuntu
+#  roles:
+#    - reverse_proxy
+
+- name: "Install MySQL on servers db01 and db02"
+  hosts: db
   become: yes
   become_user: root
   remote_user: ubuntu
   roles:
-    - reverse_proxy
+    - mysql-install
+
+- name: "Configure MySQL on server db01"
+  hosts: db[0]
+  become: yes
+  become_user: root
+  remote_user: ubuntu
+  roles:
+    - mysql-master
+
+- name: "Configure MySQL on server db02"
+  hosts: db[1]
+  become: yes
+  become_user: root
+  remote_user: ubuntu
+  roles:
+    - mysql-slave
+
+- name: "Create DB and user wordpress"
+  hosts: db[0]
+  become: yes
+  become_user: root
+  remote_user: ubuntu
+  roles:
+    - mysql-db

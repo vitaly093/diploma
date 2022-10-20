@@ -1,0 +1,40 @@
+---
+- name: "Configure mysql-server"
+  become: true
+  ansible.builtin.template:
+    src: master_conf.j2
+    dest: /etc/mysql/my.cnf
+    owner: root
+    group: root
+    mode: 0644
+  tags: [configure]
+
+- name: "Restart mysql-server"
+  become: true
+  ansible.builtin.shell: "sudo systemctl restart mysql"
+  args:
+    executable: /bin/bash
+  tags: [configure]
+
+- name: "Mysql - Check master replication status"
+  become: true
+  community.mysql.mysql_replication:
+    mode: getprimary
+    login_unix_socket: /run/mysqld/mysqld.sock
+  register: mysql_master_status
+  tags: [configure]
+
+#- name: Debug registered var
+#  debug: var=mysql_master_status
+#  tags: [debug_mysql]
+
+- name: "Specify grants for replication slave"
+  become: true
+  community.mysql.mysql_user:
+    host: 192.168.%.%
+    name: replication
+    password: replication
+    priv: "*.*:REPLICATION SLAVE"
+    state: present
+    login_unix_socket: /run/mysqld/mysqld.sock
+  tags: [install]

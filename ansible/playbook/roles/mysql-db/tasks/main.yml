@@ -1,0 +1,17 @@
+---
+- name: "wordpress db create"
+  community.mysql.mysql_db:
+    name: wordpress
+    state: present
+    login_unix_socket: /run/mysqld/mysqld.sock
+  tags: [configure]
+
+- name: "Specify grants for user wordpress on db wordpress"
+  community.mysql.mysql_user:
+    host: 192.168.%.%
+    name: wordpress
+    password: wordpress
+    priv: "wordpress.*:ALL"
+    state: present
+    login_unix_socket: /run/mysqld/mysqld.sock
+  tags: [configure]

@@ -1,0 +1,7 @@
+!includedir /etc/mysql/conf.d/
+!includedir /etc/mysql/mysql.conf.d/
+[mysqld]
+datadir=/var/lib/mysql
+bind-address           = 192.168.200.10
+server-id              = 20
+log_bin                = /var/log/mysql/mysql-slave-bin.log
