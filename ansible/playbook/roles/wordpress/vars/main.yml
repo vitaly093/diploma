@@ -1,0 +1,12 @@
+---
+DB_NAME: wordpress
+DB_USER: wordpress
+DB_PASSWORD: wordpress
+DB_HOST: 192.168.100.10
+
+nginx:
+  my_domains:
+      kvitaly.ru:
+        #port: 443
+        server_name: kvitaly.ru
+        #proxy_pass: http://192.168.100.12/

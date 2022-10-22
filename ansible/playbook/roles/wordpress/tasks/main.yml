@@ -1,0 +1,77 @@
+---
+- name: "Upgrade the OS"
+  become: true
+  ansible.builtin.shell: "sudo apt-get update"
+  args:
+    executable: /bin/bash
+  tags: [install]
+
+- name: "Install NGINX"
+  become: true
+  ansible.builtin.apt:
+    name: nginx
+  tags: [install]
+
+- name: "Disable default NGINX conf file"
+  ansible.builtin.shell: "mv /etc/nginx/sites-enabled/default /backup"
+  args:
+    executable: /bin/bash
+  tags: [install]
+
+- name: "Remove default NGINX start page"
+  ansible.builtin.shell: "mv /var/www/html/index.nginx-debian.html /backup"
+  args:
+    executable: /bin/bash
+  tags: [install]
+
+- name: "Configure NGINX"
+  ansible.builtin.template:
+    src: nginx_conf.j2
+    dest: /etc/nginx/conf.d/{{ item.key }}.conf
+  with_dict: "{{ nginx['my_domains'] }}"          # не забыть поправить шаблон
+  tags: [install]
+
+- name: "Install php 7.4"
+  become: true
+  ansible.builtin.apt:
+    name: php7.4
+  tags: [install]
+
+- name: "Make a directory for WP"
+  become: true
+  ansible.builtin.command: mkdir -p /wordpress
+  tags: [install]
+
+- name: "Get WordPress archive"
+  become: true
+  ansible.builtin.get_url:
+    url: "https://wordpress.org/latest.tar.gz"
+    dest: "/wordpress/latest.tar.gz"
+  tags: [install]
+
+- name: "Extract WP archive"
+  become: true
+  ansible.builtin.unarchive:
+    remote_src: yes
+    src: "/wordpress/latest.tar.gz"
+    dest: "/var/www/html"
+    extra_opts: [--strip-components=1]
+  tags: [install]
+
+- name: "Rename wp-config-sample"
+  ansible.builtin.shell: "mv /var/www/html/wp-config-sample.php /var/www/html/wp-config.php"
+  args:
+    executable: /bin/bash
+  tags: [install]
+
+- name: "Configure wordpress"
+  become: true
+  ansible.builtin.template:
+    src: wp-config.j2
+    dest: /var/www/html/wp-config.php
+  notify:
+    - restart nginx
+  tags: [install]
+
+
+
