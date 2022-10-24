@@ -20,15 +20,15 @@ nginx:
       grafana.kvitaly.ru:
         port: 443
         server_name: grafana.kvitaly.ru
-        proxy_pass: http://192.168.100.30/
+        proxy_pass: http://192.168.100.30:3000/
       prometheus.kvitaly.ru:
         port: 443
         server_name: prometheus.kvitaly.ru
-        proxy_pass: http://192.168.100.30/
+        proxy_pass: http://192.168.100.30:9090/
       alertmanager.kvitaly.ru:
         port: 443
         server_name: alertmanager.kvitaly.ru
-        proxy_pass: http://192.168.100.30/
+        proxy_pass: http://192.168.100.30:9093/
 
 challenge:
   - { num: 0, domain: 'kvitaly.ru' }

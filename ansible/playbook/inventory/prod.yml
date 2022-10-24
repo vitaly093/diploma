@@ -2,28 +2,28 @@
 nginx:
   hosts:
     rev_proxy:
-      ansible_host: 178.154.204.80
+      ansible_host: 192.168.100.8
 
 db:
   hosts:
     db01:
-      ansible_host: 51.250.0.193
+      ansible_host: 192.168.100.10
     db02:
-      ansible_host: 51.250.111.58
+      ansible_host: 192.168.200.10
 
 wp:
   hosts:
     app:
-      ansible_host: 51.250.85.108
+      ansible_host: 192.168.100.15
 
 git:
   hosts:
     git_instance: 
-      ansible_host: 51.250.12.82
+      ansible_host: 192.168.100.20
     git_runner:
-      ansible_host: 51.250.76.87
+      ansible_host: 192.168.100.17
 
 mon:
   hosts:
     monitoring:
-      ansible_host: 84.201.175.226
+      ansible_host: 192.168.100.30

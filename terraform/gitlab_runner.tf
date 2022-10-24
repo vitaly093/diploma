@@ -20,7 +20,7 @@ resource "yandex_compute_instance" "runner-kvitaly-ru" {
 
   network_interface {
     subnet_id = "${yandex_vpc_subnet.diploma-subnet-1.id}"
-    nat       = true
+    #nat       = true
     ip_address = "192.168.100.17"
   }
 
@@ -33,6 +33,6 @@ output "internal_ip_address_runner-kvitaly-ru" {
   value = yandex_compute_instance.runner-kvitaly-ru.network_interface.0.ip_address
 }
 
-output "external_ip_address_runner-kvitaly-ru" {
-  value = yandex_compute_instance.runner-kvitaly-ru.network_interface.0.nat_ip_address
-}
+#output "external_ip_address_runner-kvitaly-ru" {
+#  value = yandex_compute_instance.runner-kvitaly-ru.network_interface.0.nat_ip_address
+#}
