@@ -17,3 +17,7 @@ stages:
 sync:
   stage: deploy
   script: rsync -rult --delete-after --exclude=.git/ --exclude=.gitlab-ci.yml --password-file=/etc/rsyncd.scrt $CI_PROJECT_DIR/ rsync_wordpress@192.168.100.15::wordpress
+
+![image](https://user-images.githubusercontent.com/60869933/197615112-796308fc-d6a0-4142-a706-4aa40c0d2016.png)
+
+![image](https://user-images.githubusercontent.com/60869933/197616529-2cb07e33-164e-42be-8b3a-96da73c02e45.png)
