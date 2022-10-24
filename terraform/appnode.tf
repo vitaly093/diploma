@@ -13,7 +13,7 @@ resource "yandex_compute_instance" "app-kvitaly-ru" {
     initialize_params {
       image_id    = "${var.ubuntu-2004}"
       name        = "root-app-kvitaly-ru"
-      type        = "network-nvme"
+      type        = "network-ssd"
       size        = "50"
     }
   }

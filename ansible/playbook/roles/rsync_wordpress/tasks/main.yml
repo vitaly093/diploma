@@ -1,0 +1,35 @@
+---
+- name: "RSYNC_ENABLE=true"
+  become: true
+  ansible.builtin.shell: "sed -i 's/RSYNC_ENABLE=false/RSYNC_ENABLE=true/g' /etc/default/rsync"
+  tags: [wordpress]
+
+- name: "RSYNC_ENABLE=true"
+  become: true
+  ansible.builtin.shell: "/etc/init.d/rsync start"
+  tags: [wordpress]
+
+- name: "RSYNC configure"
+  become: true
+  ansible.builtin.template:
+    src: rsync.j2
+    dest: /etc/rsyncd.conf
+  notify:
+    - restart_rsync
+  tags: [install]
+
+- name: "RSYNC_ENABLE=true"
+  become: true
+  ansible.builtin.shell: "echo rsync_wordpress:wordpress_2410 > /etc/rsyncd.scrt"
+  tags: [wordpress]
+
+- name: "Creds file configure"
+  become: true
+  ansible.builtin.shell: "chmod 600 /etc/rsyncd.scrt"
+  tags: [wordpress]
+
+- name: "Owner change"
+  become: true
+  ansible.builtin.shell: "chown -R ubuntu:ubuntu /var/www/html"
+  tags: [wordpress]
+

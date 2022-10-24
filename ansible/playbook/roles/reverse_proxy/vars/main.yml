@@ -1,6 +1,7 @@
 ---
 domain_name:
   - kvitaly.ru
+#  - www.kvitaly.ru
   - gitlab.kvitaly.ru
   - grafana.kvitaly.ru
   - prometheus.kvitaly.ru

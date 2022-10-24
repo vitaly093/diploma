@@ -28,14 +28,17 @@
   ansible.builtin.template:
     src: nginx_conf.j2
     dest: /etc/nginx/conf.d/{{ item.key }}.conf
-  with_dict: "{{ nginx['my_domains'] }}"          # не забыть поправить шаблон
+  with_dict: "{{ nginx['my_domains'] }}"
   tags: [install]
 
 - name: "Install php 7.4"
   become: true
   ansible.builtin.apt:
-    name: php7.4
+    name: "{{ item }}"
+  with_items:
+    - "{{ php_modules }}"
   tags: [install]
+
 
 - name: "Make a directory for WP"
   become: true
@@ -59,6 +62,7 @@
   tags: [install]
 
 - name: "Rename wp-config-sample"
+  become: true
   ansible.builtin.shell: "mv /var/www/html/wp-config-sample.php /var/www/html/wp-config.php"
   args:
     executable: /bin/bash

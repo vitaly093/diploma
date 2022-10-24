@@ -15,3 +15,10 @@ wp:
   hosts:
     app:
       ansible_host: 51.250.85.108
+
+git:
+  hosts:
+    git_instance: 
+      ansible_host: 51.250.12.82
+    git_runner:
+      ansible_host: 51.250.76.87

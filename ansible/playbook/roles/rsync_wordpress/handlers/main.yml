@@ -1,0 +1,5 @@
+---
+- name: restart_rsync
+  become: true
+  ansible.builtin.shell: "systemctl restart rsyncd || systemctl restart rsync"
+  tags: [wordpress]

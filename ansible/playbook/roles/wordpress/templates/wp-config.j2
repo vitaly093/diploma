@@ -93,8 +93,8 @@ if($_SERVER['HTTP_X_FORWARDED_PROTO'] == 'https'){
     $_SERVER['SERVER_PORT'] = 443;
 }
 
-define('WP_HOME','https://kvitaly.ru/');
-define('WP_SITEURL','https://kvitaly.ru');
+define('WP_HOME','https://' . $_SERVER['SERVER_NAME']);
+define( 'WP_SITEURL', 'https://' . $_SERVER['SERVER_NAME']);
 
 /* That's all, stop editing! Happy publishing. */
 
