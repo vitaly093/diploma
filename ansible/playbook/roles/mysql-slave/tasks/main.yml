@@ -33,7 +33,7 @@
     master_log_file: "{{ hostvars['db01']['mysql_master_status']['File'] }}"
     master_log_pos: "{{ hostvars['db01']['mysql_master_status']['Position'] }}"
     login_unix_socket: /run/mysqld/mysqld.sock
-  tags: [configure]
+  tags: [temp]
 
 - name: "Start slave"
   become: true

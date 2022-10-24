@@ -7,34 +7,74 @@
 #  roles:
 #    - reverse_proxy
 
-- name: "Install MySQL on servers db01 and db02"
-  hosts: db
-  become: yes
-  become_user: root
-  remote_user: ubuntu
-  roles:
-    - mysql-install
+#- name: "Install MySQL on servers db01 and db02"
+#  hosts: db
+#  become: yes
+#  become_user: root
+#  remote_user: ubuntu
+#  roles:
+#    - mysql-install
+#
+#- name: "Configure MySQL on server db01"
+#  hosts: db[0]
+#  become: yes
+#  become_user: root
+#  remote_user: ubuntu
+#  roles:
+#    - mysql-master
+#
+#- name: "Configure MySQL on server db02"
+#  hosts: db[1]
+#  become: yes
+#  become_user: root
+#  remote_user: ubuntu
+#  roles:
+#    - mysql-slave
+#
+#- name: "Create DB and user wordpress"
+#  hosts: db[0]
+#  become: yes
+#  become_user: root
+#  remote_user: ubuntu
+#  roles:
+#    - mysql-db
+#
+#- name: "Wordpress installation"
+#  hosts: wp
+#  become: yes
+#  become_user: root
+#  remote_user: ubuntu
+#  roles:
+#    - wordpress
 
-- name: "Configure MySQL on server db01"
-  hosts: db[0]
-  become: yes
-  become_user: root
-  remote_user: ubuntu
-  roles:
-    - mysql-master
+#- name: "Gitlab instance installation"
+#  hosts: git[0]
+#  become: true
+#  become_user: root
+#  remote_user: ubuntu
+#  roles:
+#    - geerlingguy.gitlab
+#
+#- name: "Gitlab runner installation"
+#  hosts: git[1]
+#  become: true
+#  become_user: root
+#  remote_user: ubuntu
+#  roles:
+#    - ansible-gitlab-runner
 
-- name: "Configure MySQL on server db02"
-  hosts: db[1]
-  become: yes
+- name: "Rsync configure on wordpress server"
+  hosts: wp
+  become: true
   become_user: root
   remote_user: ubuntu
   roles:
-    - mysql-slave
+    - rsync_wordpress
 
-- name: "Create DB and user wordpress"
-  hosts: db[0]
-  become: yes
+- name: "Rsync configure on gitlab runner"
+  hosts: git[1]
+  become: true
   become_user: root
   remote_user: ubuntu
   roles:
-    - mysql-db
+    - rsync_runner

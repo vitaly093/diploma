@@ -1,0 +1,16 @@
+---
+- name: "RSYNC_pass"
+  become: true
+  ansible.builtin.shell: "echo wordpress_2410 > /etc/rsyncd.scrt"
+  tags: [wordpress]
+
+- name: "Creds file configure"
+  become: true
+  ansible.builtin.shell: "chmod 640 /etc/rsyncd.scrt"
+  tags: [wordpress]
+
+- name: "RSYNC_ENABLE=true"
+  become: true
+  ansible.builtin.shell: "chown :gitlab-runner /etc/rsyncd.scrt"
+  tags: [wordpress]
+
