@@ -13,37 +13,37 @@ rule_files:
 
 # A scrape configuration containing exactly one endpoint to scrape.
 scrape_configs:
-  - job_name: 'nodeexporter_local'
+  - job_name: 'nodeexporter_monitoring'
     scrape_interval: 5s
     static_configs:
       - targets: ['nodeexporter:9100']
 
-  - job_name: 'nodeexporter-kvitaly.ru'
+  - job_name: 'kvitaly.ru'
     scrape_interval: 5s
     static_configs:
       - targets: ['192.168.100.8:9101']
 
-  - job_name: 'nodeexporter-gitlab'
+  - job_name: 'gitlab'
     scrape_interval: 5s
     static_configs:
       - targets: ['192.168.100.20:9101']
 
-  - job_name: 'nodeexporter-gitlab-runner'
+  - job_name: 'gitlab-runner'
     scrape_interval: 5s
     static_configs:
       - targets: ['192.168.100.17:9101']
 
-  - job_name: 'nodeexporter-db01'
+  - job_name: 'db01'
     scrape_interval: 5s
     static_configs:
       - targets: ['192.168.100.10:9101']
 
-  - job_name: 'nodeexporter-db02'
+  - job_name: 'db02'
     scrape_interval: 5s
     static_configs:
       - targets: ['192.168.200.10:9101']
 
-  - job_name: 'nodeexporter-app'
+  - job_name: 'app'
     scrape_interval: 5s
     static_configs:
       - targets: ['192.168.100.15:9101']

@@ -46,6 +46,8 @@ services:
   nodeexporter:
     image: prom/node-exporter:v0.18.1
     container_name: nodeexporter
+    environment:
+      - NODE_ID={{.Node.ID}}
     volumes:
       - /proc:/host/proc:ro
       - /sys:/host/sys:ro
