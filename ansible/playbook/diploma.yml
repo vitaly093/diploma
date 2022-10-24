@@ -63,18 +63,34 @@
 #  roles:
 #    - ansible-gitlab-runner
 
-- name: "Rsync configure on wordpress server"
-  hosts: wp
-  become: true
-  become_user: root
-  remote_user: ubuntu
-  roles:
-    - rsync_wordpress
+#- name: "Rsync configure on wordpress server"
+#  hosts: wp
+#  become: true
+#  become_user: root
+#  remote_user: ubuntu
+#  roles:
+#    - rsync_wordpress
+#
+#- name: "Rsync configure on gitlab runner"
+#  hosts: git[1]
+#  become: true
+#  become_user: root
+#  remote_user: ubuntu
+#  roles:
+#    - rsync_runner
 
-- name: "Rsync configure on gitlab runner"
-  hosts: git[1]
+#- name: "Node exporters on all nodes"
+#  hosts: all
+#  become: true
+#  become_user: root
+#  remote_user: ubuntu
+#  roles:
+#    - cloudalchemy.node_exporter
+
+- name: "Monitoring"
+  hosts: mon
   become: true
   become_user: root
-  remote_user: ubuntu
+  remote_user: centos
   roles:
-    - rsync_runner
+    - prometheus_alertm_grafana
