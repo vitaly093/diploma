@@ -24,11 +24,11 @@ nginx:
       prometheus.kvitaly.ru:
         port: 443
         server_name: prometheus.kvitaly.ru
-        proxy_pass: http://192.168.100.40/
+        proxy_pass: http://192.168.100.30/
       alertmanager.kvitaly.ru:
         port: 443
         server_name: alertmanager.kvitaly.ru
-        proxy_pass: http://192.168.100.50/
+        proxy_pass: http://192.168.100.30/
 
 challenge:
   - { num: 0, domain: 'kvitaly.ru' }
