@@ -9,3 +9,11 @@ netology_diploma
 ![image](https://user-images.githubusercontent.com/60869933/197425630-f3a37b94-f9ff-41a8-a5b6-84a52be94c2c.png)
 
 ![image](https://user-images.githubusercontent.com/60869933/197425643-1c1892d0-e8bb-4ced-ac2a-78c6c2186e28.png)
+
+
+stages:
+  - deploy
+
+sync:
+  stage: deploy
+  script: rsync -rult --delete-after --exclude=.git/ --exclude=.gitlab-ci.yml --password-file=/etc/rsyncd.scrt $CI_PROJECT_DIR/ rsync_wordpress@192.168.100.15::wordpress
