@@ -1,7 +1,6 @@
 # diploma
-netology_diploma
 
-
+Скриншоты поднятых сервисов:
 
 
 ![image](https://user-images.githubusercontent.com/60869933/197367663-9b1e24ac-4a07-438a-adcf-52424016011f.png)
