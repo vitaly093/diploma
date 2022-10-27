@@ -18,7 +18,12 @@ Gitlab Runner + Pipeline
 
 Grafana
 
+![image](https://user-images.githubusercontent.com/60869933/198332559-f9ea27b6-487d-434e-9548-8f7f89bd139e.png)
+
+
+
 ![image](https://user-images.githubusercontent.com/60869933/197616529-2cb07e33-164e-42be-8b3a-96da73c02e45.png)
+
 
 
 Prometheus
